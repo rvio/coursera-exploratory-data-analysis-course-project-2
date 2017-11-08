@@ -1,0 +1,15 @@
+#read the data
+pm25 <- readRDS("Exploratory Data/Chapter 4/summarySCC_PM25.rds")
+pm25 <- subset(pm25, fips == "24510")
+
+#create a dataframe consolidating the emmissions per year
+aggpm25 <- aggregate(Emissions ~ year, data = pm25, FUN = sum)
+
+#open a png file
+png('Plot2.png')
+
+#create the requested plot
+barplot(aggpm25$Emissions,names.arg=aggpm25$year, xlab="years", col = "dark blue", main = "Change in emmissions in Baltimore")
+
+#close the png file
+dev.off()
